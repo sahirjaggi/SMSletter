@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>SMS Blast Message</h1>
+  <form action="" method="post" name="letter">
+    {{ form.hidden_tag() }}
+    <p>
+        Please enter a message to send out:<br>
+        {{ form.message(size=160) }}<br>
+    </p>
+    <p><input type="submit" value="Send Message"></p>
+  </form>
+{% endblock %}
