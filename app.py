@@ -62,7 +62,7 @@ def login():
     if request.method == 'POST' and form.validate():
         user = User(name=form.name.data,password=form.password.data)
         login_user(user)
-        return redirect('/')
+        return redirect('/send')
     return render_template('login.html', form=form)
 
 @app.route("/send", methods=['GET', 'POST'])
