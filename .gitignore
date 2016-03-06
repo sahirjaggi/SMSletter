@@ -1,4 +1,7 @@
 config.py
 *.pyc
 *.DS_Store
-flask
+bootstrap.sh
+build
+.vagrant
+Vagrantfile

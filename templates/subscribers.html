@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Subscribers{% endblock %}
+{% block content %}
+<h1>Subscribers</h1>
+{% if subscribers|length > 0 %}
+    <ul>
+    {% for sub in subscribers  %}
+        <li>
+            <h3>{{ sub.phone }}</h3></a>
+            <h5><ul>{{ sub.interactions }}</ul></h5>
+            <h5><ul>{{ sub.first }}</ul></h5>
+            <h5><ul>{{ sub.last }}</ul></h5>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>There are zero subscribers</p>
+{% endif %}
+{% endblock %}
