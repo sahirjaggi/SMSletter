@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template, request, redirect
 from flask.ext.mongoengine import MongoEngine
 from flask.ext.mongoengine.wtf import model_form
-from flask.ext.login import LoginManager, login_required, login_user, logout_user
+from flask.ext.login import LoginManager, login_required, login_user, logout_user, current_user
 from wtforms import Form, TextField, PasswordField, validators
 from twilio.rest import TwilioRestClient
 from backend import config
@@ -58,6 +58,8 @@ class Subscriber(db.Document):
 
 @app.route("/", methods=['GET','POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect('/send')
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User(name=form.name.data,password=form.password.data)
@@ -74,7 +76,7 @@ def send():
             message = client.messages.create(body=form.content.data,
         	to = sub.phone,
         	from_ = config.twilio_num)
-        return redirect("/")
+        return redirect("/send")
     return render_template("send.html", form=form)
 
 @app.route("/subscribe/<phone>")
